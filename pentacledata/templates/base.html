@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+     {% load static %}
+    <title>{% block page_title %}PENTACLE DATA{% endblock %}</title>
+    <link rel="icon" href="/static/images/pentacledata.png">
+    <!-- Loads path to static files -->
+    {% load staticfiles %}
+    <!-- Includes -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Satisfy" type="text/css" >
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'base.css' %}" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="{% static 'base.js' %}"></script>
+
+    {% block head %}
+    <!-- this can be overruled -->
+    {% endblock %}
+</head>
+<body>
+    <!-- Using bootstrap for front-end component library -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div id="main-navbar" class="container-fluid">
+
+            <!-- Header Brand -->
+            <div class="navbar-header col-md-12">
+                <div class="logo col-md-2">
+                    <img class="navbar-brand" style="display: inline;" src="/static/images/pentacledata.png" alt="logo" />
+                    <a id="base-navbar-home" class="navbar-brand" href="/metrics/">PentacleData</a>
+                </div>
+                <div class="col-md-8 col-md-offset-1">
+
+                </div>
+
+            </div>
+            </div>
+    </nav> 
+
+    <div id="page-body">
+        {% block body %}
+        {% endblock %}
+    </div>
+
+<div id=ent-footer style="text-align:center" class="ribbon">
+<footer class="fixed-bottom">
+  <p>Powered by: Django 1.11</p>
+  <p>Contact us: <a href="pentacledata@gmail.com">Mail to the Admin</a></p>
+</footer>
+</div>
+</body>
+</html>

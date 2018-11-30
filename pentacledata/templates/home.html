@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_tags %}
+
+{% block page_title %}Pentacle Data{% endblock %}
+
+{% block head %}
+
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'base.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'home.css' %}" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="{% static 'home.js' %}"></script>
+
+{% endblock %}
+{% block body %}
+    <div class="nav col-md-6" >
+                <ul id="myTab">
+                        <li id="cs-jira-results" class="dropdown">
+                            <a href="#my" class="dropdown-toggle" data-toggle="dropdown">Department<span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <form>
+            					        <li id="cs-jira-metrics"><a id="testjira" href="#section-add-department">Add Department</a></li>
+            					        <li id="cs-jira-git-check"><a id="testgitcheck" href="#section-department-list">Department List</a></li>
+          				            </form>
+                                </ul>
+                        </li>
+                        <li id="cs-jira-results" class="dropdown">
+                            <a href="#my" class="dropdown-toggle" data-toggle="dropdown">Doctor<span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <form>
+            					        <li id="cs-jira-metrics"><a id="testjira" href="#section-add-doctor">Add Doctor</a></li>
+            					        <li id="cs-jira-git-check"><a id="testgitcheck" href="#section-doctor-list">Doctor List</a></li>
+          				            </form>
+                                </ul>
+                        </li>
+                        <li id="cs-jira-results" class="dropdown">
+                            <a href="#my" class="dropdown-toggle" data-toggle="dropdown">Patient<span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <form>
+            					        <li id="cs-jira-metrics"><a id="testjira" href="#section-add-patient">Add Patient</a></li>
+            					        <li id="cs-jira-git-check"><a id="testgitcheck" href="#section-patient-list">Patient List</a></li>
+          				            </form>
+                                </ul>
+                        </li>
+                </ul>
+        </div>
+
+    <div id="section-add-department" class="tab-content col-md-6">
+        <h1 align="center" class="ribbon"  style="margin-top:0;margin-bottom: 20px" ><strong class="ribbon-content"> Dashboard Department</strong></h1>
+            <form align="center" method="post">
+                {% csrf_token %}
+            <font size="4">{{ form_dept.as_p }}</font>
+            <br>
+        <input id="crs-department-submit-button"  type="submit" value="Submit" class="button" name="submit_department"/>
+            </form>
+    </div>
+
+
+    <div id="section-add-doctor" class="tab-content col-md-6">
+        <h1 align="center" class="ribbon"  style="margin-top:0;margin-bottom: 20px" ><strong class="ribbon-content"> Dashboard Accountant</strong></h1>
+
+        <form align="center" method="post">
+    {% csrf_token %}
+    <font size="4">{{ form_doctor.as_p }}</font>
+    <br>
+
+        <input id="crs-git-check-submit-button"  type="submit" value="Submit" class="button" name="submit_git_check" onclick="return validate_submit_git_check()"/>
+</form>
+</div>
+
+
+    <div id="section-add-patient" class="tab-content col-lg-6">
+        <h1 align="center" class="ribbon"  style="margin-top:0;margin-bottom: 20px" ><strong class="ribbon-content"> Dashboard Accountant</strong></h1>
+
+        <form method="post">
+    {% csrf_token %}
+    <font size="4">{{ form_patient|crispy }}</font>
+    <br>
+
+        <input id="crs-patient-submit-button"  type="submit" value="Submit" class="button" name="submit_git_check" onclick="return validate_submit_git_check()"/>
+</form>
+</div>
+
+
+    <div id="section-patient-list" class="tab-content col-md-6">
+
+
+        <table  class="hoverTable" id="crs-git-check-commits-with-no-jira-issues" style="empty-cells:hide;" border="1"   cellpadding="1" cellspacing="1" width="90%" align="center">
+            <tr bgcolor="#CADAEC">
+                <th colspan="2" style="text-align:center">Patient Details </th>
+            </tr>
+                {% for entry in patient_details %}
+                <tr>
+                    <td>
+                        <a target="_blank" href="{{ entry }}"><font size="2" color="red">{{ entry.patient_name }}</font></a>
+                    </td>
+                    <td>
+                        <a target="_blank" href="{{ entry }}"><font size="2" color="red">{{ entry.mobile }}</font></a>
+                    </td>
+                </tr>
+                {% endfor %}
+
+     </table>
+
+
+</div>
+
+    {% endblock %}
+
